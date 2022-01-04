@@ -1,0 +1,74 @@
+<template>
+    <lightning-card title="Accounts View" icon-name="standard:account">
+        <lightning-button label="Add Account" icon-name="utility:add" class="slds-m-right_small" slot="actions" onclick={addRow}></lightning-button>
+        <lightning-button label={toggleSaveLabel} class="slds-m-right_small" icon-name="utility:save" slot="actions" onclick={handleSave}>
+        </lightning-button>
+        <lightning-button label="Clear All" icon-name="utility:clear" slot="actions" onclick={accountTempRecords}>
+        </lightning-button>
+
+
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr class="">
+                    <th class="slds-size_3-of-10" scope="col">
+                        <div class="slds-truncate" title="Name">S.No</div>
+                    </th>
+                    <th class="slds-size_3-of-10" scope="col">
+                        <div class="slds-truncate" title="Name">Name</div>
+                    </th>
+                    <th class="slds-size_3-of-10" scope="col">
+                        <div class="slds-truncate" title="Last Name">Phone</div>
+                    </th>
+                    <th class="slds-size_3-of-10" scope="col">
+                        <div class="slds-truncate" title="Phone">Revenue</div>
+                    </th>
+                    <th class="slds-size_3-of-10" scope="col">
+                        <div class="slds-truncate" title="Phone">Action</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={accRecords} for:item="acc" for:index="indexVar">
+                    <tr key={acc.key} class="slds-hint-parent">
+                        <td class="slds-size_3-of-10" data-label="Prospecting">
+                            <div title="Prospecting">
+                                <div class="slds-text-heading_small slds-text-align_center">
+                                    <p>{indexVar}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="slds-size_3-of-10" data-label="Prospecting">
+                            <div title="Prospecting">
+                                <lightning-input key={acc.key} type="text" data-id={acc.key} name="input1" label="Name"
+                                    value={acc.Name} variant="label-hidden" required=true onchange={handleNameChange}>
+                                </lightning-input>
+                            </div>
+                        </td>
+
+                        <td class="slds-size_3-of-10" data-label="Prospecting">
+                            <div title="Prospecting">
+                                <lightning-input key={acc.key} type="tel" data-id={acc.key} name="input1"
+                                    label="Phone" value={acc.Phone} variant="label-hidden" onchange={handlePhoneChange}>
+                                </lightning-input>
+                            </div>
+                        </td>
+                        <td class="slds-size_3-of-10" data-label="Prospecting">
+                            <div title="Prospecting">
+                                <lightning-input type="number" key={acc.key} data-id={acc.key} name="input1"
+                                    label="Revenue" value={acc.AnnualRevenue} variant="label-hidden"
+                                    onchange={handleWebsiteChange}></lightning-input>
+                            </div>
+                        </td>
+                        <td class="slds-size_1-of-10" data-label="Prospecting">
+                            <a name={indexVar} data-id={acc.key} onclick={removeRow}>
+                                <lightning-icon icon-name="utility:delete" alternative-text="delete" size="small">
+                                </lightning-icon>
+                            </a>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+
+    </lightning-card>
+</template>

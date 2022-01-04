@@ -1,0 +1,32 @@
+<apex:page controller="AccountController" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="Accounts" id="pb" mode="inlineEdit">
+            <apex:pageMessages />      
+            <apex:variable var="rowIndex" value="{!0}"/>
+            <apex:pageBlockTable id="thetable" title="Accounts" var="acc" value="{!listWrappAcc}">
+                <apex:column >
+                    <apex:inputCheckbox value="{!acc.selected}"/>
+                </apex:column>
+                <apex:column headerValue="No." style="width:20px; text-align:center;" headerClass="centertext">
+                    <apex:outputText value="{0}" style="text-align:center;">
+                        <apex:param value="{!rowIndex+1}" />
+                    </apex:outputText>
+                    <apex:variable var="rowIndex" value="{!rowIndex+1}"/>
+                </apex:column>
+                <apex:column headerValue="Account Name" >
+                    <apex:outputField value="{!acc.acc.Name}"/>
+                </apex:column>
+                <apex:column headerValue="Phone" >
+                    <apex:outputField value="{!acc.acc.Phone}"/>
+                </apex:column>
+                <apex:variable var="rowIndex" value="{!rowIndex	+1}"/>
+            </apex:pageBlockTable>
+                
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!addRow}" value="Add Account" reRender="pb"/>  
+                <apex:commandButton value="Save" action="{!save}" reRender="pb" />
+                <apex:commandButton value="Delete" action="{!deleteRows}" reRender="pb" />
+            </apex:pageBlockButtons>           
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
